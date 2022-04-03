@@ -1,7 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import Board from "./components/Board/Board";
-import Cards from "./components/Cards/Cards";
 import Sign from "./components/Sign/Sign";
 
 function App() {
@@ -20,10 +19,8 @@ function App() {
   return (
     <div className="container ">
       <h1 className="title"> The Rick &amp; Morty Memory Match Game </h1>
-      <Board />
-      <Cards>{console.log(characters)}</Cards>
-      <Cards />
-      <Cards />
+      <Board allCharacters={characters} />
+
       <Sign />
     </div>
   );

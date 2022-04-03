@@ -2,7 +2,11 @@ import React from "react";
 import "./Cards.css";
 
 const Cards = (props) => {
-  return <div>Cards Comp</div>;
+  return (
+    <div>
+      <img src={props.character.image} alt="" />
+    </div>
+  );
 };
 
 export default Cards;
