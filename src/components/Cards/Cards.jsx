@@ -4,7 +4,7 @@ import "./Cards.css";
 const Cards = (props) => {
   return (
     <div>
-      <img src={props.character.image} alt="" />
+      <img className="cards" src={props.character.image} alt="" />
     </div>
   );
 };

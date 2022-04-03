@@ -9,8 +9,16 @@ function App() {
   useEffect(() => {
     const getCharactersFromApi = () => {
       return fetch("https://rickandmortyapi.com/api/character")
-        .then((res) => res.json())
-        .then((data) => setCharacters(data.results))
+        .then((response) => response.json())
+        .then((responseData) => {
+          let arrAllCharacters = [
+            ...responseData.results,
+            ...responseData.results,
+          ];
+          arrAllCharacters.sort(() => 0.5 - Math.random());
+          setCharacters(arrAllCharacters);
+        })
+
         .catch((error) => console.log(error));
     };
     getCharactersFromApi();
