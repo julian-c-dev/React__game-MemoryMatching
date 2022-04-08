@@ -5,8 +5,8 @@ import "./Board.css";
 const Board = (props) => {
   const renderedCharacterCards = props.allCharacters.map((character) => {
     return (
-      <div key={character.id}>
-        <Cards character={character} />
+      <div key={Math.floor(Math.random() * 100000)}>
+        <Cards character={character} onCardClicked={props.onCardClicked} />
       </div>
     );
   });

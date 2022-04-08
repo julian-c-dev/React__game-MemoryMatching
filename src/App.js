@@ -1,10 +1,13 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
-import Board from "./components/Board/Board";
+import React, { useState, useEffect, Suspense } from "react";
 import Sign from "./components/Sign/Sign";
+
+const Board = React.lazy(() => import("./components/Board/Board"));
 
 function App() {
   const [characters, setCharacters] = useState([]);
+
+  const [cardsChosenIds, setCardsChosenIds] = useState([]);
 
   useEffect(() => {
     const getCharactersFromApi = () => {
@@ -18,17 +21,43 @@ function App() {
           arrAllCharacters.sort(() => 0.5 - Math.random());
           setCharacters(arrAllCharacters);
         })
-
         .catch((error) => console.log(error));
     };
     getCharactersFromApi();
   }, []);
 
+  const selectCards = (cardId) => {
+    if (cardsChosenIds.length > 1) {
+      setCardsChosenIds([]);
+    } else {
+      setCardsChosenIds([...cardsChosenIds, cardId]);
+    }
+  };
+
   return (
     <div className="container ">
       <h1 className="title"> The Rick &amp; Morty Memory Match Game </h1>
-      <Board allCharacters={characters} />
-
+      <Suspense
+        fallback={
+          <div>
+            <p style={{ color: "white" }} className="text-center">
+              Loading cards ...{" "}
+            </p>
+            <div className="text-center">
+              <div className="spinner-border" role="status">
+                <span className="sr-only"></span>
+              </div>
+            </div>
+          </div>
+        }
+      >
+        <Board
+          allCharacters={characters}
+          cardsChosenIds={cardsChosenIds}
+          onCardClicked={selectCards}
+        />
+      </Suspense>
+      {console.log(cardsChosenIds)}
       <Sign />
     </div>
   );
