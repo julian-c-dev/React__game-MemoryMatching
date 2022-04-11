@@ -6,8 +6,9 @@ const Board = React.lazy(() => import("./components/Board/Board"));
 
 function App() {
   const [characters, setCharacters] = useState([]);
-
   const [cardsChosenIds, setCardsChosenIds] = useState([]);
+  const [cardsChosen, setCardsChosen] = useState([]);
+  const [cardsWon, setCardsWon] = useState([]);
 
   useEffect(() => {
     const getCharactersFromApi = () => {
@@ -26,7 +27,18 @@ function App() {
     getCharactersFromApi();
   }, []);
 
-  const selectCards = (cardId) => {
+  const flipCard = (e) => {};
+
+  const checkMatch = () => {
+    const optionOneId = cardsChosenIds[0];
+    const optionTwoId = cardsChosenIds[1];
+
+    if (optionOneId === optionTwoId) {
+      alert("You have clicked the same image");
+    }
+  };
+
+  const handleCardClicked = (cardId) => {
     if (cardsChosenIds.length > 1) {
       setCardsChosenIds([]);
     } else {
@@ -54,7 +66,7 @@ function App() {
         <Board
           allCharacters={characters}
           cardsChosenIds={cardsChosenIds}
-          onCardClicked={selectCards}
+          onCardClicked={handleCardClicked}
         />
       </Suspense>
       {console.log(cardsChosenIds)}

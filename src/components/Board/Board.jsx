@@ -1,12 +1,12 @@
 import React from "react";
-import Cards from "../Cards/Cards";
+import Card from "../Card/Card";
 import "./Board.css";
 
 const Board = (props) => {
   const renderedCharacterCards = props.allCharacters.map((character) => {
     return (
       <div key={Math.floor(Math.random() * 100000)}>
-        <Cards character={character} onCardClicked={props.onCardClicked} />
+        <Card character={character} onCardClicked={props.onCardClicked} />
       </div>
     );
   });

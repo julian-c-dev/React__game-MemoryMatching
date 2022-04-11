@@ -1,25 +1,24 @@
 import React from "react";
-import "./Cards.css";
+import "./Card.css";
 import imageBlank from "../../assets/blank.png";
 
-const Cards = (props) => {
-  const sendId = (e) => {
+const Card = (props) => {
+  const cardClicked = (e) => {
     props.onCardClicked(e.target.id);
   };
 
   return (
-    <div>
+    <>
       <img
         id={props.character.id}
-        onClick={(e) => {
-          sendId(e);
-        }}
-        className="cards"
+        image-id={3}
+        onClick={cardClicked}
+        className="card"
         src={imageBlank}
         alt=""
       />
-    </div>
+    </>
   );
 };
 
-export default Cards;
+export default Card;
